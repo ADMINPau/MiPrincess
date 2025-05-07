@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Mes Juntas 💖</title>
+    <style>
+        /* Estilo general */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #ffcccc, #ffd9cc, #ffffcc, #ccffcc, #ccffff, #ccccff, #ffccff);
+            color: #4a4a4a;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+
+        #counter {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #ff69b4;
+        }
+
+        #image-container {
+            margin: 20px auto;
+        }
+
+        img {
+            max-width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #changing-text {
+            font-size: 1em;
+            margin: 20px;
+            color: #d2691e;
+            padding: 0 10px;
+        }
+
+        audio {
+            display: none; /* Oculta el reproductor nativo */
+        }
+
+        .audio-controls {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .audio-button {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: white;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .audio-button:active {
+            background-color: #ff1493;
+        }
+
+        #final-text {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #ff1493;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+
+        /* Media Queries para pantallas pequeñas */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            #counter {
+                font-size: 1em;
+            }
+
+            #changing-text {
+                font-size: 0.9em;
+            }
+
+            #final-text {
+                font-size: 1em;
+            }
+
+            .audio-button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Un Mes Juntas 💖</h1>
+    <div id="counter"></div>
+
+    <div id="image-container">
+        <img src="img/photo_2025-05-06_20-27-27.jpg" alt="Imagen principal de nosotras">
+    </div>
+
+    <div id="changing-text"></div>
+
+    <!-- Audio -->
+    <audio id="audio">
+        <source src="audio/Vanesa_Martin-Descubri_Acustico.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Controles de audio personalizados -->
+    <div class="audio-controls">
+        <button class="audio-button" id="play-button">▶️ Reproducir</button>
+        <button class="audio-button" id="pause-button">⏸️ Pausar</button>
+        <button class="audio-button" id="volume-up-button">🔊 Volumen +</button>
+        <button class="audio-button" id="volume-down-button">🔉 Volumen -</button>
+    </div>
+
+    <div id="final-text">Mi bonita, cada día que pasa solo confirma lo afortunada que soy de tenerte. Sé que pronto la distancia desaparecerá algún día y podré abrazarte fuerte. Mientras tanto, este pequeño rincón en la web es mi forma de recordarte lo importante que eres para mí. Te quiero más de lo que las palabras pueden decir y de lo que a veces puedo expresar. ¡Por muchos meses más juntas! ❤️</div>
+
+    <script>
+        // Contador del tiempo juntas
+        const startDate = new Date('2025-04-07');
+        const currentDate = new Date('2025-05-07');
+        const diffTime = Math.abs(currentDate - startDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const counter = document.getElementById('counter');
+        counter.innerText = `¡Llevamos ${diffDays} días juntas!`;
+
+        // Textos que cambian cada 10 segundos
+        const texts = [
+            "Te quiero porque iluminas mi día solo con hablar contigo ☀️.",
+            "Te quiero porque te has convertido en alguien muy especial en mi vida 🇵🇾 🇻🇪.",
+            "Te quiero porque incluso en la distancia, siento tu amor ✈️.",
+            "Te quiero por ser la persona más hermosa, inteligente y bondadosa que he conocido 💜.",
+            "Gracias por hacerme la persona más feliz del mundo 🌎."
+        ];
+        const changingText = document.getElementById('changing-text');
+        let index = 0;
+
+        function changeText() {
+            changingText.innerText = texts[index];
+            index = (index + 1) % texts.length;
+        }
+
+        changeText();
+        setInterval(changeText, 10000); // Cambia cada 10 segundos
+
+        // Funciones para el audio
+        const audio = document.getElementById('audio');
+        const playButton = document.getElementById('play-button');
+        const pauseButton = document.getElementById('pause-button');
+        const volumeUpButton = document.getElementById('volume-up-button');
+        const volumeDownButton = document.getElementById('volume-down-button');
+
+        playButton.addEventListener('click', () => {
+            audio.play();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            audio.pause();
+        });
+
+        volumeUpButton.addEventListener('click', () => {
+            if (audio.volume < 1) {
+                audio.volume = Math.min(audio.volume + 0.1, 1); // Incrementa el volumen
+            }
+        });
+
+        volumeDownButton.addEventListener('click', () => {
+            if (audio.volume > 0) {
+                audio.volume = Math.max(audio.volume - 0.1, 0); // Reduce el volumen
+            }
+        });
+    </script>
+</body>
+</html>
